@@ -5,10 +5,10 @@ package main
 import "fmt"
 
 func main() {
-	var a, b float32
-	fmt.Print("Введите первое число: ")
+	var a, b uint
+	fmt.Print("Введите длину по 1й стороне: ")
 	fmt.Scanln(&a)
-	fmt.Print("Введите второе число: ")
+	fmt.Print("Введите длину по 2й стороне: ")
 	fmt.Scanln(&b)
-	fmt.Printf("Сумма чисел: %f\n ", a+b)
+	fmt.Printf("S (Площадь прямоугольника) = %d", a*b)
 }
