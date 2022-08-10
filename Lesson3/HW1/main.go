@@ -13,7 +13,7 @@ func main() {
 	a, b, symbol = inputAndValidation()
 	if symbol != "error" {
 		calc = calcfn(a, b, calc, symbol)
-		calc = round(calc)
+		rondAndPrint(calc)
 	}
 }
 
@@ -22,8 +22,8 @@ func inputAndValidation() (float64, float64, string) {
 	var symbol, yn string
 
 	//Check for operators
-	fmt.Print("Введите оператор (доступные: +, -, *, /, n!, ^ и V): ")
-	fmt.Scanln(&symbol)
+	fmt.Print("Введите оператор (доступные: \n- (сложение) +, \n- (вычитание) -, \n- (умножение) *, \n- (деление) /, \n- (факториал) n!, \n- (степень) ^, \n- (корень) V): ")
+	
 	if symbol != "/" && symbol != "+" && symbol != "-" && symbol != "*" && symbol != "n!" && symbol != "^" && symbol != "V" {
 		fmt.Println("Неправильный ввод, хотите начать сначала? \ny - да, n - нет: ")
 		fmt.Scanln(&yn)
@@ -75,7 +75,7 @@ func calcfn(a, b, calc float64, symbol string) float64 {
 	return calc
 }
 
-func round(calc float64) float64 {
+func rondAndPrint(calc float64) {
 	calc = math.Round(calc*100) / 100
 	var intCalc int = int(calc * 100)
 
@@ -86,6 +86,4 @@ func round(calc float64) float64 {
 	} else {
 		fmt.Printf("Результат: %.2f", calc)
 	}
-
-	return calc
 }
