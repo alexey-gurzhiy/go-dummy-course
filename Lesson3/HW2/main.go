@@ -6,19 +6,17 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"math/big"
 )
 
 func main() {
-	var a int
+	var a uint
 	fmt.Print("Введите число: ")
 	fmt.Scanln(&a)
 
-	for i:=0
-	var symbol string
-	a, b, symbol = inputAndValidation()
-	if symbol != "error" {
-		calc = calcfn(a, b, calc, symbol)
-		calc = round(calc)
+	for i := 0; i < int(a)+1; i++ {		
+		if big.NewInt(int64(i)).ProbablyPrime(20) {
+			fmt.Printf("%d - простое число\n", i)
+		}
 	}
 }
