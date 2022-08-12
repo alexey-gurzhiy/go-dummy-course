@@ -23,7 +23,7 @@ func inputAndValidation() (float64, float64, string) {
 
 	//Check for operators
 	fmt.Print("Введите оператор (доступные: \n- (сложение) +, \n- (вычитание) -, \n- (умножение) *, \n- (деление) /, \n- (факториал) n!, \n- (степень) ^, \n- (корень) V): ")
-	
+	fmt.Scanln(&symbol)
 	if symbol != "/" && symbol != "+" && symbol != "-" && symbol != "*" && symbol != "n!" && symbol != "^" && symbol != "V" {
 		fmt.Println("Неправильный ввод, хотите начать сначала? \ny - да, n - нет: ")
 		fmt.Scanln(&yn)
