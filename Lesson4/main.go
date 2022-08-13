@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-	// var maxNum, searchNum, verify int
 	//  принимаем на вход набор целых чисел
 	var numbers string
 	var arr []int
@@ -25,7 +24,7 @@ func main() {
 		}
 		arr = append(arr, intVar)
 	}
-
+	fmt.Println(arr)
 	// начинаем сортировку
 	for i, element := range arr {
 		arr = insertionSort(i, element, arr)
