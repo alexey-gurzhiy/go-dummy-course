@@ -13,8 +13,8 @@ func main() {
 	var input uint
 	fmt.Println("Введите номер числа в порядке Фибоначи: ")
 	// fmt.Scanln(&input)
-	input = 6000000
-	// fmt.Println(fibbonachi(input))
+	input = 600000
+	fmt.Println(fibbonachi(input))
 	fmt.Println(time.Since(start).Milliseconds())
 
 	start = time.Now()
@@ -31,6 +31,13 @@ func main() {
 	fmt.Printf("Запрошенное число это: %d\n", input)
 	fmt.Println(time.Since(start).Milliseconds())
 
+	start = time.Now()
+	input = 600000 // переуказал, по тому, что в предыдущей переменной была логика перезаписи значения инпут. Не удалил - что бы сравнивать.
+	var fiboMap3 = make(map[uint]uint, input)
+	fiboMap3[0], fiboMap3[1] = 0, 1
+	input = fibbonachi4(input-1, fiboMap3)
+	fmt.Printf("Запрошенное число это: %d\n", input)
+	fmt.Println(time.Since(start).Milliseconds())
 }
 
 func fibbonachi(n uint) uint {
@@ -70,4 +77,14 @@ func fibbonachi3(n uint, fiboMap2 map[uint]uint) (uint, map[uint]uint) {
 	}
 	fiboMap2[n] = fib + fiboMap2[n-2]
 	return fiboMap2[n], fiboMap2
+}
+
+
+func fibbonachi4(n uint, fiboMap3 map[uint]uint) uint {
+	if _, ok := fiboMap3[n-1]; ok {
+		fiboMap3[n]= fiboMap3[n-1]+ fiboMap3[n-2]
+		return fiboMap3[n]
+	} 
+	fiboMap3[n]= fibbonachi4(n-1, fiboMap3) + fiboMap3[n-2]
+	return fiboMap3[n]
 }
