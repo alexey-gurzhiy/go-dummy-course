@@ -13,8 +13,8 @@ func main() {
 	var input uint
 	fmt.Println("Введите номер числа в порядке Фибоначи: ")
 	// fmt.Scanln(&input)
-	input = 50
-	fmt.Println(fibbonachi(input))
+	input = 6000000
+	// fmt.Println(fibbonachi(input))
 	fmt.Println(time.Since(start).Milliseconds())
 
 	start = time.Now()
@@ -24,16 +24,23 @@ func main() {
 	fmt.Printf("Запрошенное число это: %d\n", fiboMap[input])
 	fmt.Println(time.Since(start).Milliseconds())
 
+	start = time.Now()
+	var fiboMap2 = make(map[uint]uint, input)
+	fiboMap2[0], fiboMap2[1] = 0, 1
+	input, fiboMap2 = fibbonachi3(input-1, fiboMap2)
+	fmt.Printf("Запрошенное число это: %d\n", input)
+	fmt.Println(time.Since(start).Milliseconds())
+
 }
 
 func fibbonachi(n uint) uint {
 	if n == 1 {
 		return 0
-	} else if n == 2 {
-		return 1
-	} else {
-		return fibbonachi(n-1) + fibbonachi(n-2)
 	}
+	if n == 2 {
+		return 1
+	}
+	return fibbonachi(n-1) + fibbonachi(n-2)
 }
 
 func fibbonachi2(input, i uint, fiboMap map[uint]uint) (uint, map[uint]uint) {
@@ -52,4 +59,15 @@ func fibbonachi2(input, i uint, fiboMap map[uint]uint) (uint, map[uint]uint) {
 		fibbonachi2(input, i, fiboMap)
 	}
 	return input, fiboMap
+}
+
+func fibbonachi3(n uint, fiboMap2 map[uint]uint) (uint, map[uint]uint) {
+	var fib uint
+	if _, ok := fiboMap2[n-1]; ok {
+		fib = fiboMap2[n-1]
+	} else {
+		fib, fiboMap2 = fibbonachi3(n-1, fiboMap2)
+	}
+	fiboMap2[n] = fib + fiboMap2[n-2]
+	return fiboMap2[n], fiboMap2
 }
