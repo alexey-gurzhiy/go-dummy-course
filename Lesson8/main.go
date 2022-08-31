@@ -18,15 +18,6 @@ import (
 	"fmt"
 )
 
-type FlagConfig struct {
-	Port         int
-	Db_url       string
-	Jaeger_url   string
-	Sentry_url   string
-	Kafka_broker string
-	Some_app_id  string
-	Some_app_key string
-}
 
 func main() {
 	cfg := configuration.GetConfiguration()
