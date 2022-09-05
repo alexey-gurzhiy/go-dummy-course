@@ -1,13 +1,14 @@
 package configuration
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"net/url"
 	"os"
 	"strconv"
 )
-
+//Помню, что нет смысла загонять в декод и оно и так может спарсить, но переделывать и так не успеваю. Уже после курса самостоятельно посмотрю и переделаю декод как в разборе 
 func (f FlagConfig) Decode(value string) string {
 	parsed, err := url.Parse(value)
 	if err != nil {
@@ -17,16 +18,16 @@ func (f FlagConfig) Decode(value string) string {
 }
 
 type FlagConfig struct {
-	Port         int
-	Db_url       string
-	Jaeger_url   string
-	Sentry_url   string
-	Kafka_broker string
-	Some_app_id  string
-	Some_app_key string
+	Port         int    `json:"port"`
+	Db_url       string `json:"db_url"`
+	Jaeger_url   string `json:"jaeger_url"`
+	Sentry_url   string `json:"sentry_url"`
+	Kafka_broker string `json:"kafka_broker"`
+	Some_app_id  string `json:"some_app_id"`
+	Some_app_key string `json:"some_app_key"`
 }
 
-func GetConfiguration() FlagConfig {
+func GetConfiguration(fileData string) FlagConfig {
 	cfg := FlagConfig{}
 	check := make(map[string]bool)
 	check["port"] = false
@@ -96,5 +97,15 @@ func GetConfiguration() FlagConfig {
 	cfg.Jaeger_url = cfg.Decode(cfg.Jaeger_url)
 	cfg.Sentry_url = cfg.Decode(cfg.Sentry_url)
 
+	fmt.Println(fileData)
+	var flags FlagConfig
+	if err := json.Unmarshal([]byte(fileData), &flags); err != nil {
+		fmt.Printf("\n\n!!!!!		There was an error. Ommiting json file. Error message: %s	!!!!!\n\n", err)
+	} else {
+		cfg = flags
+	}
+	cfg.Db_url = cfg.Decode(cfg.Db_url)
+	cfg.Jaeger_url = cfg.Decode(cfg.Jaeger_url)
+	cfg.Sentry_url = cfg.Decode(cfg.Sentry_url)
 	return cfg
 }
