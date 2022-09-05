@@ -16,17 +16,7 @@ package main
 import (
 	configuration "Lesson8/Configuration"
 	"fmt"
-)
 
-type FlagConfig struct {
-	Port         int
-	Db_url       string
-	Jaeger_url   string
-	Sentry_url   string
-	Kafka_broker string
-	Some_app_id  string
-	Some_app_key string
-}
 
 func main() {
 	cfg := configuration.GetConfiguration()
@@ -38,5 +28,6 @@ func main() {
 	fmt.Printf("kafka_broker: 	%s \n", cfg.Kafka_broker)
 	fmt.Printf("some_app_id: 	%s \n", cfg.Some_app_id)
 	fmt.Printf("some_app_key: 	%s \n", cfg.Some_app_key)
+
 
 }
