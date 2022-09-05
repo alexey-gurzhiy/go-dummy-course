@@ -16,9 +16,6 @@ package main
 import (
 	configuration "Lesson8/Configuration"
 	"fmt"
-	"os"
-
-)
 
 
 func main() {
@@ -31,18 +28,6 @@ func main() {
 	fmt.Printf("kafka_broker: 	%s \n", cfg.Kafka_broker)
 	fmt.Printf("some_app_id: 	%s \n", cfg.Some_app_id)
 	fmt.Printf("some_app_key: 	%s \n", cfg.Some_app_key)
-fmt.Println(" ")
-file,err := os.Open("go.mod")
-if err != nil {
-	panic(err)
-}
 
-data := make([]byte, 24)
-result, err := file.Read(data)
-if err != nil{
-	panic(err)
-}
-fmt.Println(result, string(data))
-fmt.Printf("file: %v\n", file)
 
 }
